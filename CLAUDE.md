@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+***ALWAYS USE 'ULTRATHINK' WHEN THE USER ASKS ANY QUESTION***
+
 ## Project Overview: Nova - AI Chief of Staff
 
 Nova is NOT just a voice interface project. It's an AI executive assistant system where Claude (YOU) acts as the brain with MCP tools for autonomous real-world actions. The key insight: **Claude IS Nova** - we're not building a separate AI.
@@ -70,30 +72,24 @@ python quick-status.py
    * added a memory folder which includes checkpoints and all memory files saved, this should function as the CORE ALIGNMENT folder between Claude Code, Claude Desktop and the User - Tom,
    * Removed old / redundant docs
    * Updated this file, Claude.md manually by user
-   * 
-
-- ❌ Voice → MCP connection missing (priority #2)
-- 📋 Next: Connect voice to Claude via MCP bridge files (Note the purpose of this is to put the )
+   * User updated Nova_Project to be more clear about the design
+   * User has moved the archived folder to another directory to ensure no confusion
+- 📋 Next: TBC with consultation of the user
 
 ## Critical Context
 
 ### Technical Decisions
-- **No API Architecture** - Using Claude Desktop Max plan
-- **MCP Over Everything** - All actions through MCP tools
-- **Simple Bridge Pattern** - Voice → Text files → Claude → Actions
-- **Memory First** - Solving chat limits with contextual permanence
+- **Please update this section based on my changes throughout the project, especially in /docs**
 
 ### Key Files
 - `NOVA_PROJECT.md` - Project vision and current status
-- `NOVA_MEMORY_ARCHITECTURE.md` - Memory system design
-- `CHECKPOINT_2025-05-27_1430.md` - Session recovery checkpoint
+- `NOVA_MEMORY_ARCHITECTURE.md` - Memory system design - CRITICAL FOR AUTOMATIC UPDATE AND CONVERSATION PERSISTENCE
+- `NOVA_COMPLETE_CONTEXT.md` - Full vision of the project
 - `voice_bridge/mcp_bridge/` - Text files for Claude communication
 
 ## When Continuing This Project
 
-1. Load checkpoint: "I'm Tom, continuing Nova. Load CHECKPOINT_2025-05-27_1430.md"
-2. Focus on connecting voice bridge to MCP (not building new features)
-3. Remember: Nova = Claude + MCP Tools + Voice Access + Memory
+1. Load checkpoint: Understand the full context of the project, CHECK with the user before making any changes
 
 ## Testing
 

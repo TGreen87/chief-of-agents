@@ -11,6 +11,7 @@ from elevenlabs.client import ElevenLabs
 import logging
 from config import Config
 from context_manager import ContextManager
+from mcp_bridge_handler import MCPBridgeHandler
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -31,6 +32,7 @@ class VoiceBridgeSession:
             max_messages=Config.MAX_CONTEXT_MESSAGES,
             max_length=Config.MAX_MESSAGE_LENGTH
         )
+        self.mcp_bridge = MCPBridgeHandler()
         self.deepgram_connection = None
         self.is_processing = False
         self.last_audio_time = time.time()
@@ -130,9 +132,18 @@ class VoiceBridgeSession:
             self.is_processing = False
     
     async def generate_response(self, text: str) -> str:
-        # Placeholder for AI response generation
-        # In production, this would call Claude, GPT, or another AI service
-        return f"I heard you say: '{text}'. This is a placeholder response."
+        """Send user message to Claude via MCP bridge and get response."""
+        try:
+            # Get conversation context for Claude
+            context = self.context_manager.get_context()
+            
+            # Send to Claude via MCP bridge
+            response = await self.mcp_bridge.send_to_claude(text, context)
+            
+            return response
+        except Exception as e:
+            logger.error(f"Error getting response from Claude: {e}")
+            return "I'm having trouble processing that. Please try again."
     
     async def generate_audio(self, text: str):
         try:
