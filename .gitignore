@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+nova-memory/*.json
+!nova-memory/initial_memories.json
+*.log
+checkpoints/
+private/
+temp/
+tmp/
+
+# API Keys and Secrets
+*_key.txt
+*_token.txt
+secrets/
+credentials/
+
+# Audio files
+*.wav
+*.mp3
+*.m4a
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Claude/MCP
+.claude/
+!.claude/settings.local.json
+claude_desktop_config.json
+mcp-settings.json
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

@@ -1,0 +1,8 @@
+deepgram-sdk==3.2.7
+elevenlabs==2.1.0
+python-dotenv==1.0.0
+pyaudio==0.2.11
+openai==1.30.1
+python-telegram-bot==21.2
+fastapi==0.111.0
+uvicorn==0.30.0

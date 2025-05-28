@@ -1,0 +1,55 @@
+"""
+Nova Voice Bridge - Main WebSocket Server
+Handles voice streaming between mobile devices and Claude Desktop
+"""
+import asyncio
+import json
+import logging
+from pathlib import Path
+from datetime import datetime
+from typing import Set, Dict
+
+import uvicorn
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+from config import Config
+from context_manager import ContextManager
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+app = FastAPI(title="Nova Voice Bridge")
+
+# Serve static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Track active connections
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: Set[WebSocket] = set()
+        self.context_managers: Dict[str, ContextManager] = {}
+    
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.add(websocket)
+        session_id = str(datetime.now().timestamp())
+        self.context_managers[session_id] = ContextManager()
+        logger.info(f"Client connected: {session_id}")
+        return session_id
+    
+    def disconnect(self, websocket: WebSocket, session_id: str):
+        self.active_connections.discard(websocket)
+        if session_id in self.context_managers:
+            del self.context_managers[session_id]
+        logger.info(f"Client disconnected: {session_id}")
+
+manager = ConnectionManager()
+
+@app.get("/")
+async def root():
+    return FileResponse("static/index.html")
+
+# Part 1 of voice_bridge.py - Basic structure
